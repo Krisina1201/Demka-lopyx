@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Lopyxxx.MainWindow"
+		x:CompileBindings="False"
+        Title="Lopyxxx">
+	<Grid RowDefinitions="Auto, *, Auto">
+
+		<Grid ColumnDefinitions="*,*,*,*" Grid.Row="0">
+			<TextBox Grid.Column="0" Watermark="Введите для поиска..." Grid.ColumnSpan="2" Margin="5" />
+			<ComboBox PlaceholderText="Сортировка"
+					  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+			<ComboBox Grid.Column="3" PlaceholderText="Фильтрация"
+					  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+		</Grid>
+		
+		<ListBox x:Name="ProductListBox" Grid.Row="1">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border Margin="7" Padding="15" Background="White" BorderThickness="1" BorderBrush="Black">
+						<Grid ColumnDefinitions="*, *, *, *, *">
+							<Image Width="100" Grid.Column="0"
+								   Height="100"
+								Source="{Binding ImagePath}"/>
+							<Grid Grid.Column="1" RowDefinitions="*, Auto, *, *, *"  Grid.ColumnSpan="3">
+								<StackPanel Grid.Row="1" Orientation="Horizontal">
+									<TextBlock Text="{Binding Title}" FontSize="20"/>
+									<TextBlock Text=" | " FontSize="20"/>
+									<TextBlock Text="{Binding ProductType.Title}" FontSize="20"/>
+								</StackPanel>
+								<TextBlock Text="{Binding ArticleNumber}" Grid.Row="2"/>
+								<TextBlock Text="{Binding ProductMaterials.MaterialId}" Grid.Row="3"/>
+							
+								<TextBlock Text="{Binding MinCostForAgent}" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1"/>
+							</Grid>
+						</Grid>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>	
+		</ListBox>
+
+		<StackPanel Grid.Row="2" Background="Aqua" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+			<Button Content="«"/>
+			<Button Content="1"/>
+			<Button Content="2"/>
+			<Button Content="3"/>
+			<Button Content="4"/>
+			<Button Content="5"/>
+			<Button Content="»"/>
+		</StackPanel>
+		
+	</Grid>
+</Window>
