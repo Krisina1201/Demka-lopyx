@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Lopyxxx.AddProductWindow"
+		WindowStartupLocation="CenterScreen"
+		Height="450"
+		Width="850"
+		x:CompileBindings="False"
+        Title="AddProductWindow">
+	<DockPanel DockPanel.Dock="Top" Background="#CEFFF9">
+		<Grid ColumnDefinitions="*,*">
+			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Grid.Column="0">
+				<TextBlock Text="Добавление нового продукта" Margin="5" FontWeight="Bold" FontSize="20"/>
+
+				<!-- Блок с изображением -->
+				<Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="150" Height="150">
+					<Image x:Name="ImagePreview" Stretch="Uniform" />
+				</Border>
+				<Button Content="Выбрать изображение" Click="SelectImage_Click" Margin="5" Background="#00CC76"/>
+
+				<TextBox HorizontalAlignment="Stretch" Margin="5" Watermark="Название" x:Name="TitleTextBox"/>
+				<ComboBox HorizontalAlignment="Stretch" Margin="5" PlaceholderText="Выберите тип продукта" x:Name="TypeCombobox"/>
+				<TextBox HorizontalAlignment="Stretch" Margin="5" Watermark="Артикул" x:Name="ArticylTextBox"/>
+				<TextBox HorizontalAlignment="Stretch" Margin="5" Watermark="Цена" x:Name="PriceTextBox"/>
+				<TextBox HorizontalAlignment="Stretch" Margin="5" Watermark="Количество человек для производства" x:Name="CountPeopleTextBox"/>
+				<TextBox HorizontalAlignment="Stretch" Margin="5" Watermark="Номер производственного цеха" x:Name="WorkShopNumberTextBox"/>
+				<TextBox HorizontalAlignment="Stretch" Margin="5" AcceptsReturn="True" Watermark="Описание" x:Name="DescriptionTextBox"/>
+			</StackPanel>
+
+			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Grid.Column="1">
+				<ComboBox HorizontalAlignment="Stretch" Margin="5" PlaceholderText="Выберите материал"
+                          x:Name="MaterialCombobox" SelectionChanged="MaterialCombobox_SelectionChanged"/>
+				<ListBox x:Name="MaterialListBox" Height="150">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0"/>
+								<Button Click="Button_Click_2" Content="Удалить" HorizontalAlignment="Right"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<Button Content="Сохранить" Click="Button_Click" Background="#00CC76" HorizontalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center"/>
+				<Button Content="Назад" Click="Button_Click_1" Background="#00CC76" HorizontalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center"/>
+				<Button Content="Удалить продукт" Click="Button_Click_Delete" Background="Red" HorizontalAlignment="Stretch" Margin="5"
+                        x:Name="DeleteButton" HorizontalContentAlignment="Center"/>
+			</StackPanel>
+		</Grid>
+	</DockPanel>
+</Window>

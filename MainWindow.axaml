@@ -5,35 +5,56 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Lopyxxx.MainWindow"
 		x:CompileBindings="False"
+		WindowStartupLocation="CenterScreen"
         Title="Lopyxxx">
 	<Grid RowDefinitions="Auto, *, Auto">
 
-		<Grid ColumnDefinitions="*,*,*,*" Grid.Row="0">
-			<TextBox Grid.Column="0" Watermark="Введите для поиска..." Grid.ColumnSpan="2" Margin="5" />
-			<ComboBox PlaceholderText="Сортировка"
-					  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
-			<ComboBox Grid.Column="3" PlaceholderText="Фильтрация"
+		<Grid ColumnDefinitions="*,*,*,*,*,*" Grid.Row="0" >
+			<TextBox Grid.Column="0" Watermark="Введите для поиска..." Background="#CEFFF9" Grid.ColumnSpan="2" Margin="5" />
+			<ComboBox PlaceholderText="Сортировка по названию" FontSize="12" x:Name="SortByNameCombobox" 
+					  Grid.Column="2" HorizontalAlignment="Stretch" Background="#CEFFF9" VerticalAlignment="Stretch" Margin="5">
+				<ComboBoxItem>По возрастанию</ComboBoxItem>
+				<ComboBoxItem>По убыванию</ComboBoxItem>
+			</ComboBox>
+			<ComboBox PlaceholderText="Сортировка по номеру цеха" FontSize="12" x:Name="SortByNumberCombobox"
+					  Grid.Column="3" HorizontalAlignment="Stretch" Background="#CEFFF9" VerticalAlignment="Stretch" Margin="5">
+				<ComboBoxItem>По возрастанию</ComboBoxItem>
+				<ComboBoxItem>По убыванию</ComboBoxItem>
+			</ComboBox>
+			<ComboBox PlaceholderText="Сортировка по цене" FontSize="12" x:Name="SortByCostCombobox"
+					  Grid.Column="4" HorizontalAlignment="Stretch" Background="#CEFFF9" VerticalAlignment="Stretch" Margin="5">
+				<ComboBoxItem>По возрастанию</ComboBoxItem>
+				<ComboBoxItem>По убыванию</ComboBoxItem>
+			</ComboBox>
+			<ComboBox Grid.Column="5" PlaceholderText="Фильтрация" Background="#CEFFF9" x:Name="filtercombobox"
 					  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
 		</Grid>
 		
-		<ListBox x:Name="ProductListBox" Grid.Row="1">
+		<ListBox x:Name="ProductListBox" Grid.Row="1" SelectionMode="Multiple">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Border Margin="7" Padding="15" Background="White" BorderThickness="1" BorderBrush="Black">
+					<Border Margin="7" Padding="15" BorderThickness="1" BorderBrush="Black" Background="#CEFFF9">
 						<Grid ColumnDefinitions="*, *, *, *, *">
 							<Image Width="100" Grid.Column="0"
 								   Height="100"
 								Source="{Binding ImagePath}"/>
 							<Grid Grid.Column="1" RowDefinitions="*, Auto, *, *, *"  Grid.ColumnSpan="3">
 								<StackPanel Grid.Row="1" Orientation="Horizontal">
-									<TextBlock Text="{Binding Title}" FontSize="20"/>
-									<TextBlock Text=" | " FontSize="20"/>
-									<TextBlock Text="{Binding ProductType.Title}" FontSize="20"/>
+									<TextBlock Text="{Binding Title}" FontSize="20" Foreground="#00CC76"/>
+									<TextBlock Text=" | " FontSize="20" Foreground="#00CC76"/>
+									<TextBlock Text="{Binding ProductType.Title}" FontSize="20" Foreground="#00CC76"/>
 								</StackPanel>
 								<TextBlock Text="{Binding ArticleNumber}" Grid.Row="2"/>
-								<TextBlock Text="{Binding ProductMaterials.MaterialId}" Grid.Row="3"/>
+								
+								<ItemsControl ItemsSource="{Binding ProductMaterials}" Grid.Row="3">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Material.Title}"/>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
 							
-								<TextBlock Text="{Binding MinCostForAgent}" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1"/>
+								<TextBlock Text="{Binding MinCostForAgent}" HorizontalAlignment="Right"  FontWeight="Bold" Grid.Column="4" Grid.Row="2"/>
 							</Grid>
 						</Grid>
 					</Border>
@@ -41,14 +62,23 @@
 			</ListBox.ItemTemplate>	
 		</ListBox>
 
-		<StackPanel Grid.Row="2" Background="Aqua" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-			<Button Content="«"/>
-			<Button Content="1"/>
-			<Button Content="2"/>
-			<Button Content="3"/>
-			<Button Content="4"/>
-			<Button Content="5"/>
-			<Button Content="»"/>
+		<StackPanel Grid.Row="2" Background="White" Orientation="Horizontal" HorizontalAlignment="Right" x:Name="ButtonStackPanel">
+			<StackPanel Margin="5" Orientation="Horizontal">
+				
+				<Button Content="Добавить продукт" Background="#00CC76" Margin="5" x:Name="ChangeButton1" Click="AddNewProduct_Click"/>
+				<Button Content="Изменить стоимость" Background="#00CC76" Margin="5" Click="ChangePriceClick" x:Name="ChangeButton"/>
+			</StackPanel>
+			
+			<StackPanel Orientation="Horizontal" >
+				<Button Content="«"  Background="White" x:Name="BackButton" Click="Back_Click"/>
+				<Button Content="1" Background="White" x:Name="OneButton" Click="One_Button_Click"/>
+				<Button Content="2" Background="White" x:Name="TwoButton" Click="Two_Button_Click"/>
+				<Button Content="..." Background="White" x:Name="ThreePointButton"/>
+				<Button Content="5" Background="White" x:Name="EndButton" Click="End_Button_Click"/>
+				<Button Content="»" Background="White" x:Name="ForwardButton" Click="Forward_Click"/>
+			</StackPanel>
+
+			
 		</StackPanel>
 		
 	</Grid>
